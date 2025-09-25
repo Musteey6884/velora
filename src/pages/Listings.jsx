@@ -1,28 +1,42 @@
-import { useEffect, useState } from "react";
-import ListingCard from "../components/ListingCard";
-import api from "../services/api";
-import { useSearchParams } from "react-router-dom";
+// src/pages/Listings.jsx
+import { useLocation } from "react-router-dom";
+import { servicesData } from "../data/servicesData";
+import ServiceCard from "../components/ServiceCard";
 
-export default function Listings(){
-  const [list, setList] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [params] = useSearchParams();
-  const q = params.get("q") || "";
-  const city = params.get("city") || "";
+export default function Listings() {
+  const location = useLocation();
+  const query = new URLSearchParams(location.search).get("q");
 
-  useEffect(()=> {
-    setLoading(true);
-    api.get("/listings", { params: { q, city } }).then(res => setList(res.data)).catch(()=>setList([])).finally(()=>setLoading(false));
-  }, [q, city]);
+  // Filter if query exists, otherwise show all
+  const filteredServices = query
+    ? servicesData.filter((service) =>
+        service.title.toLowerCase().includes(query.toLowerCase())
+      )
+    : servicesData;
+
+  // Group services by category
+  const grouped = filteredServices.reduce((acc, service) => {
+    if (!acc[service.category]) acc[service.category] = [];
+    acc[service.category].push(service);
+    return acc;
+  }, {});
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">Listings</h2>
-      {loading ? <div>Loading...</div> : (
-        <div className="grid md:grid-cols-3 gap-4">
-          {list.map(l => <ListingCard key={l._id} item={l} />)}
+    <div className="max-w-7xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-10 text-center">
+        {query ? `Results for "${query}"` : "All Services"}
+      </h1>
+
+      {Object.keys(grouped).map((category, idx) => (
+        <div key={idx} className="mb-12">
+          <h2 className="text-2xl font-semibold mb-6">{category}</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {grouped[category].map((service, index) => (
+              <ServiceCard key={index} {...service} />
+            ))}
+          </div>
         </div>
-      )}
+      ))}
     </div>
-  )
+  );
 }
