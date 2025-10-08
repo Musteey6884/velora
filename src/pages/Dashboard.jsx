@@ -26,7 +26,7 @@ export default function Dashboard(){
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-semibold">Hello, {user?.name || "Guest"}</h2>
-          <p className="text-sm text-gray-600">Velora points: {user?.points ?? 0}</p>
+          <p className="text-sm muted">Velora points: {user?.points ?? 0}</p>
         </div>
         <div className="flex items-center gap-3">
           <CurrencySelector onChange={setCurrency} />
@@ -43,7 +43,7 @@ export default function Dashboard(){
       <section className="mt-6">
         <h3 className="text-xl font-semibold">Nearby attractions</h3>
         <div className="mt-3">
-          {nearby.map(n => <div key={n.id} className="p-3 bg-white rounded mb-2">{n.name} — {n.type} — {n.distanceKm} km</div>)}
+         {nearby.map(n => <div key={n.id} className="p-3 surface rounded mb-2">{n.name} — {n.type} — {n.distanceKm} km</div>)}
         </div>
       </section>
     </div>
