@@ -1,9 +1,15 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+
 export default function Footer(){
   return (
-    <footer className="bg-gray-900 text-white mt-10">
-      <div className="max-w-6xl mx-auto px-4 py-6 text-center">
-        <div>© {new Date().getFullYear()} Velora — Where living meets lifestyle</div>
+    <footer className="w-full surface py-8">
+      <div className="max-w-5xl mx-auto text-center px-6">
+        <Link to="/services" className="inline-block px-6 py-3 rounded btn-gold font-medium">
+          View all services
+        </Link>
+        <p className="mt-4 muted text-sm">Velora — curated luxury experiences</p>
       </div>
     </footer>
-  )
+  );
 }
