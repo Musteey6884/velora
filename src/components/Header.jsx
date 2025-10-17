@@ -41,15 +41,16 @@ export default function Header() {
   }
 
   return (
-    <header className="w-full surface px-4 md:px-6 py-3 flex items-center justify-between">
+  <header className="w-full surface px-3 md:px-5 py-3 flex items-center justify-between">
       <div className="flex items-center gap-4">
         <Link to="/" className="flex items-center gap-3">
           <div className="text-2xl font-semibold gold-strong">VELORA</div>
         </Link>
 
-        {/* desktop nav */}
-        <nav className="hidden md:flex gap-4 items-center">
+  {/* desktop nav */}
+  <nav className="hidden md:flex gap-3 items-center">
           <Link to="/" className="muted hover:gold-strong px-3 py-1 rounded">Home</Link>
+          <Link to="/listings" className="muted hover:gold-strong px-3 py-1 rounded">Listings</Link>
           <Link to="/about" className="muted hover:gold-strong px-3 py-1 rounded">About</Link>
           <Link to="/contact" className="muted hover:gold-strong px-3 py-1 rounded">Contact</Link>
         </nav>
@@ -96,8 +97,9 @@ export default function Header() {
       {/* mobile dropdown */}
       {mobileOpen && (
         <div ref={mobileRef} className="md:hidden absolute left-4 right-4 top-16 surface rounded shadow-lg p-4 z-40">
-          <nav className="flex flex-col gap-2">
+            <nav className="flex flex-col gap-2">
             <Link to="/" onClick={() => setMobileOpen(false)} className="p-2 muted rounded">Home</Link>
+            <Link to="/listings" onClick={() => setMobileOpen(false)} className="p-2 muted rounded">Listings</Link>
             <Link to="/about" onClick={() => setMobileOpen(false)} className="p-2 muted rounded">About</Link>
             <Link to="/contact" onClick={() => setMobileOpen(false)} className="p-2 muted rounded">Contact</Link>
             {user ? (

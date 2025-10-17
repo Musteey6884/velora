@@ -60,4 +60,7 @@ article[role="button"]:focus { box-shadow: 0 6px 22px rgba(212,175,55,0.15); tra
   background: linear-gradient(90deg, rgba(212,175,55,0.15), rgba(212,175,55,0.08));
   border: 1px solid rgba(212,175,55,0.5);
   color: var(--gold-strong);
+  transition: transform .15s ease, box-shadow .15s ease;
 }
+
+.btn-gold:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 24px rgba(212,175,55,0.06); }

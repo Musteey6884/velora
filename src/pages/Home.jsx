@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 // 🖼 Import local images
 import apartmentImg from '../assets/images/service1.jpg';
@@ -23,25 +24,26 @@ const discover = [
 
 // 🔹 Card component with hover/animation polish
 function Card({ item }) {
+  // Wrap the card in a Link so users can navigate to the listings page with a query
+  const to = `/listings?q=${encodeURIComponent(item.title)}`;
   return (
-    <article
-      className="surface rounded-lg overflow-hidden shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-xl"
-      tabIndex={0}
-      role="button"
-      aria-label={item.title}
-    >
-      <div
-        className="h-44 md:h-40 bg-cover bg-center relative"
-        style={{ backgroundImage: `url(${item.img})` }}
+    <Link to={to} aria-label={item.title} className="block">
+      <article
+        className="surface rounded-lg overflow-hidden shadow-sm transform transition-all duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:shadow-xl"
       >
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-90 transition-opacity duration-300 hover:opacity-100" />
-      </div>
+        <div
+          className="h-44 md:h-40 bg-cover bg-center relative"
+          style={{ backgroundImage: `url(${item.img})` }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-90 transition-opacity duration-300 hover:opacity-100" />
+        </div>
 
-      <div className="p-4">
-        <h3 className="font-semibold gold">{item.title}</h3>
-        <p className="mt-2 muted text-sm">Explore premium options in this category.</p>
-      </div>
-    </article>
+        <div className="p-4">
+          <h3 className="font-semibold gold">{item.title}</h3>
+          <p className="mt-2 muted text-sm">Explore premium options in this category.</p>
+        </div>
+      </article>
+    </Link>
   );
 }
 
